@@ -47,7 +47,11 @@ export class UserService {
   }): Promise<User> {
     const { where, data } = params;
     const { id } = where;
-    const idNumber = Number(id);
-    return await this.prisma.user.update({ where: { id: idNumber }, data });
+    return await this.prisma.user.update({ where: { id: Number(id) }, data });
+  }
+
+  async deleteUser(where: Prisma.UserWhereUniqueInput): Promise<User> {
+    const { id } = where;
+    return await this.prisma.user.delete({ where: { id: Number(id) } });
   }
 }
